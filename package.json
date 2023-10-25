@@ -26,7 +26,7 @@
     "lint:fix:format": "prettier --write **.{sol,js,ts}",
     "lint:fix:eslint": "eslint --fix . --ext js,ts",
     "prepare": "husky install",
-    "release": "git reset --hard && npm publish from-package"
+    "release": "git reset --hard && npm publish --access public"
   },
   "lint-staged": {
     "*.sol": "prettier --write",
