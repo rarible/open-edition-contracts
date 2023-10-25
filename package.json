@@ -1,5 +1,5 @@
 {
-  "name": "raribledrop",
+  "name": "@rarible/raribledrop",
   "version": "1.0.0",
   "description": "Primary drops on the evm.",
   "license": "MIT",
