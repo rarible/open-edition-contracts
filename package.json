@@ -7,7 +7,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "build": "hardhat compile --config ./hardhat.config.ts",
+    "build": "hardhat compile --config ./hardhat.config.ts && tsc -skipLibCheck --project tsconfig-lib.json",
     "clean": "hardhat clean; hardhat clean --config ./hardhat-coverage.config.ts; forge clean; rm -rf coverage coverage.json hh-cache hh-cache-coverage",
     "test": "hardhat test --config ./hardhat.config.ts",
     "test:upgradeable": "hardhat test --config ./src-upgradeable/hardhat.config.ts",
@@ -80,5 +80,9 @@
     "web3": ">=1.8.0",
     "got": ">=11.8.5",
     "minimatch": ">=3.0.5"
-  }
+  },
+  "files": [
+    "readme.md",
+    "dist"
+  ]
 }
