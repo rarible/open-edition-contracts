@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { SeaDrop } from "../SeaDrop.sol";
+import { RaribleDrop } from "../RaribleDrop.sol";
 
 contract MaliciousRecipient {
     bool public startAttack;
     address public token;
-    SeaDrop public seaDrop;
+    RaribleDrop public raribleDrop;
 
     receive() external payable {
         if (startAttack) {
             startAttack = false;
-            seaDrop.mintPublic{ value: 1 ether }({
+            raribleDrop.mintPublic{ value: 1 ether }({
                 nftContract: token,
                 feeRecipient: address(this),
                 minterIfNotPayer: address(this),
@@ -25,11 +25,11 @@ contract MaliciousRecipient {
         startAttack = true;
     }
 
-    function attack(SeaDrop _seaDrop, address _token) external payable {
+    function attack(RaribleDrop _raribleDrop, address _token) external payable {
         token = _token;
-        seaDrop = _seaDrop;
+        raribleDrop = _raribleDrop;
 
-        _seaDrop.mintPublic{ value: 1 ether }({
+        _raribleDrop.mintPublic{ value: 1 ether }({
             nftContract: _token,
             feeRecipient: address(this),
             minterIfNotPayer: address(this),
@@ -37,6 +37,6 @@ contract MaliciousRecipient {
         });
 
         token = address(0);
-        seaDrop = SeaDrop(address(0));
+        raribleDrop = RaribleDrop(address(0));
     }
 }
