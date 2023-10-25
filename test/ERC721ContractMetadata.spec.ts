@@ -126,20 +126,35 @@ describe(`ERC721ContractMetadata (v${VERSION})`, function () {
     expect(await token.royaltyBasisPoints()).to.equal(0);
 
     await expect(
-      token.connect(admin).setRoyaltyInfo([owner.address, 100])
+      token.connect(admin).setRoyaltyInfo({
+        royaltyAddress: owner.address,
+        royaltyBps: 100
+      })
     ).to.be.revertedWith("OnlyOwner");
 
     await expect(
-      token.connect(owner).setRoyaltyInfo([owner.address, 10_001])
+      token.connect(owner).setRoyaltyInfo({
+        royaltyAddress: owner.address,
+        royaltyBps: 10_001
+      })
     ).to.be.revertedWith("InvalidRoyaltyBasisPoints(10001)");
     await expect(
-      token.connect(owner).setRoyaltyInfo([ethers.constants.AddressZero, 200])
+      token.connect(owner).setRoyaltyInfo({
+        royaltyAddress: ethers.constants.AddressZero,
+        royaltyBps: 200
+      })
     ).to.be.revertedWith(`RoyaltyAddressCannotBeZeroAddress()`);
 
-    await expect(token.connect(owner).setRoyaltyInfo([admin.address, 100]))
+    await expect(token.connect(owner).setRoyaltyInfo({
+      royaltyAddress: admin.address,
+      royaltyBps: 100
+    }))
       .to.emit(token, "RoyaltyInfoUpdated")
       .withArgs(admin.address, 100);
-    await expect(token.connect(owner).setRoyaltyInfo([admin.address, 500])) // 5%
+    await expect(token.connect(owner).setRoyaltyInfo({
+      royaltyAddress: admin.address,
+      royaltyBps: 500
+    })) // 5%
       .to.emit(token, "RoyaltyInfoUpdated")
       .withArgs(admin.address, 500);
 
