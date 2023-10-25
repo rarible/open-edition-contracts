@@ -25,7 +25,8 @@
     "lint:fix": "yarn lint:fix:format && yarn lint:fix:eslint",
     "lint:fix:format": "prettier --write **.{sol,js,ts}",
     "lint:fix:eslint": "eslint --fix . --ext js,ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "git reset --hard && npm publish from-package"
   },
   "lint-staged": {
     "*.sol": "prettier --write",
@@ -84,5 +85,8 @@
   "files": [
     "readme.md",
     "dist"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
