@@ -12,7 +12,7 @@ contract DeployRaribleDropCloneFactory is ScriptBase {
         setUp();
         bytes memory creationCode = type(ERC721RaribleDropCloneFactory).creationCode;
         console2.logBytes32(keccak256(creationCode));
-        bytes32 salt = bytes32(0x0000000000000000000000000000000000000000d40ba0de8b5adb1cc4070008);
+        bytes32 salt = bytes32(0x0000000000000000000000000000000000000000d40ba0de8b5adb1cc4070009);
         // bytes32 salt = bytes32(0);
 
         vm.broadcast(deployer);

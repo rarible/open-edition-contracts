@@ -61,6 +61,10 @@ contract ERC721RaribleDropCloneable is
     /// @notice Track the enumerated allowed RaribleDrop addresses.
     address[] internal _enumeratedAllowedRaribleDrop;
 
+    function getAllowedRaribleDrop() public view returns (address[] memory) {
+        return _enumeratedAllowedRaribleDrop;
+    }
+
     /**
      * @dev Reverts if not an allowed RaribleDrop contract.
      *      This function is inlined instead of being a modifier
