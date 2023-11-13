@@ -41,4 +41,31 @@ contract ERC721RaribleDropCloneFactory {
         );
         return instance;
     }
+
+    function createCloneForOwner(
+        string memory name,
+        string memory symbol,
+        bytes32 salt,
+        address targetOwner
+    ) external returns (address) {
+        // Derive a pseudo-random salt, so clone addresses don't collide
+        // across chains.
+        bytes32 cloneSalt = keccak256(
+            abi.encodePacked(salt, blockhash(block.number))
+        );
+
+        address instance = Clones.cloneDeterministic(
+            raribleDropCloneableUpgradeableImplementation,
+            cloneSalt
+        );
+        address[] memory allowedRaribleDrop = new address[](1);
+        allowedRaribleDrop[0] = DEFAULT_RARIBLEDROP;
+        ERC721RaribleDropCloneable(instance).initializeWithPayoutAndFeeRecipient(
+            name,
+            symbol,
+            allowedRaribleDrop,
+            targetOwner
+        );
+        return instance;
+    }
 }

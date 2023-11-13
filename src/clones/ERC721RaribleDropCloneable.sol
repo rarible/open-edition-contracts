@@ -37,6 +37,9 @@ import {
     DefaultOperatorFiltererUpgradeable
 } from "operator-filter-registry/upgradeable/DefaultOperatorFiltererUpgradeable.sol";
 
+
+import { IRaribleDrop } from "../interfaces/IRaribleDrop.sol";
+
 /**
  * @title  ERC721RaribleDrop
  * @author James Wenzel (emo.eth)
@@ -86,6 +89,33 @@ contract ERC721RaribleDropCloneable is
         __DefaultOperatorFilterer_init();
         _updateAllowedRaribleDrop(allowedRaribleDrop);
         _transferOwnership(initialOwner);
+        emit RaribleDropTokenDeployed();
+    }
+
+    /**
+     * @notice Deploy the token contract with its name, symbol,
+     *         and allowed RaribleDrop addresses.
+     */
+    function initializeWithPayoutAndFeeRecipient(
+        string calldata __name,
+        string calldata __symbol,
+        address[] calldata allowedRaribleDrop,
+        address initialOwner
+    ) public initializer {
+        __ERC721ACloneable__init(__name, __symbol);
+        __ReentrancyGuard_init();
+        __DefaultOperatorFilterer_init();
+        _updateAllowedRaribleDrop(allowedRaribleDrop);
+        _transferOwnership(initialOwner);
+        // Update the allowed fee recipient.
+        IRaribleDrop(allowedRaribleDrop[0]).updateAllowedFeeRecipient(
+            initialOwner,
+            true
+        );
+        // Update the creator payout address.
+        IRaribleDrop(allowedRaribleDrop[0]).updateCreatorPayoutAddress(
+            initialOwner
+        );
         emit RaribleDropTokenDeployed();
     }
 
