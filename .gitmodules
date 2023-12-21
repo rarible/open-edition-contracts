@@ -33,3 +33,4 @@
 [submodule "lib/operator-filter-registry"]
 	path = lib/operator-filter-registry
 	url = https://github.com/rarible/operator-filter-registry.git
+	branch = develop
