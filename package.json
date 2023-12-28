@@ -1,6 +1,6 @@
 {
   "name": "@rarible/raribledrop",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Primary drops on the evm.",
   "license": "MIT",
   "engines": {
@@ -85,7 +85,8 @@
   "files": [
     "readme.md",
     "dist",
-    "src"
+    "src",
+    "src-upgradeable"
   ],
   "publishConfig": {
     "access": "public",

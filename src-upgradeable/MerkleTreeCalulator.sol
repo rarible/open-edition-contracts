@@ -7,7 +7,7 @@ import { ERC721PartnerRaribleDrop } from "./ERC721PartnerRaribleDrop.sol";
 
 import { AllowListData, MintParams } from "./lib/RaribleDropStructs.sol";
 
-import { Merkle } from "../src-upgradeable/murky/Merkle.sol";
+import { Merkle } from "lib/murky/Merkle.sol";
 
 contract MerkleTreeCalculator {
 
